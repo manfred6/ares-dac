@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ares-dac"
+version = "0.1.0"
+description = "Detection-as-Code tooling for ARES"
+requires-python = ">=3.11"
+
+dependencies = [
+    "PyYAML>=6.0",
+    "schema>=0.7",
+]
+
+[tool.setuptools.packages.find]
+where = ["lib"]

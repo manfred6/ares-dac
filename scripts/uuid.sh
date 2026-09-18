@@ -26,12 +26,12 @@ if grep -qi "$UUID" "./artifacts/meta.json"; then
     exit 1
 fi
 
-if grep -qE '^id:[[:space:]]*"[a-zA-Z0-9\-]+"[[:space:]]*$' "$METADATA"; then
+if grep -qE '^uuid:[[:space:]]*"[a-zA-Z0-9\-]+"[[:space:]]*$' "$METADATA"; then
     echo "[!] -> UUID already present in $METADATA"
     exit 1
 fi
 
-sed -i "2i id: \"$UUID\"" "$METADATA"
+sed -i "2i uuid: \"$UUID\"" "$METADATA"
 
 if grep -qi "$UUID" "$METADATA"; then
     echo "[+] -> Added UUID [$UUID] to $METADATA" 

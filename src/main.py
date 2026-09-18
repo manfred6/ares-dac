@@ -14,6 +14,7 @@ from utils import artifacts, Markdown
 
 @dataclass
 class RuleResult:
+    uuid: str
     name: str
     path: str
     rule_type: str
@@ -86,6 +87,7 @@ def main():
                 )
                 results.append(
                     RuleResult(
+                        uuid=meta["uuid"],
                         name=meta["name"],
                         path=str(file.parent),
                         rule_type=rule_type,

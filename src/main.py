@@ -3,10 +3,13 @@
 from __future__ import annotations
 from pathlib import Path
 from dataclasses import dataclass
+from elasticsearch import Elasticsearch
+from dotenv import load_dotenv
 import os
 import logging
 
 from linter import Linter
+from validator import Validator
 from utils import artifacts, Markdown
 
 @dataclass
@@ -15,14 +18,17 @@ class RuleResult:
     path: str
     rule_type: str
     lint: str
-    #validation: str
+    validation: str
     #tests: str
 
+CA_CERT = Path("./artifacts/ares.crt")
 RULES_PATH = Path("./rules/")
 MD_PATH = Path("./artifacts/")
 SUPPORTED_RULES = [
         "esql"
 ]
+
+load_dotenv()
 
 def init_logging(level=logging.INFO):
     logging.basicConfig(
@@ -45,7 +51,14 @@ def lint(linter, file):
 def main():
     linter = Linter()
     markdown = Markdown()
+    validator = Validator()
     results = list()
+
+    es_client = Elasticsearch(
+        os.environ["ELASTIC_URL"],
+        api_key=os.environ["ELASTIC_API_KEY"],
+        ca_certs=CA_CERT
+    )
     files = RULES_PATH.rglob("metadata.yml")
     for file in files:
         rules_path = Path(file.parent)
@@ -58,13 +71,17 @@ def main():
             logger.info(f"Validated metadata.yml [{file}]")
         for rule in rules_path.iterdir():
             rule_type = rule.suffix.lstrip(".")
+            rule_indices = meta["indices"]
             if rule_type in SUPPORTED_RULES:
+                print(type(rule.read_text()), rule.read_text())
+                validate_result = validator.validate(es_client, rule.read_text(), rule_type, rule_indices)
                 results.append(
                     RuleResult(
                         name=meta["name"],
                         path=str(file.parent),
                         rule_type=rule_type,
-                        lint=check_result(linter_result)
+                        lint=check_result(linter_result),
+                        validation=check_result(validate_result)
                     )
                 )
 

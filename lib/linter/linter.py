@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 from pathlib import Path
-import os
-import yaml
 from schema import Schema, SchemaError, Regex # https://www.andrewvillazon.com/validate-yaml-python-schema/
+import os, sys
+import logging
+
+logger = logging.getLogger(__name__)
 
 class Linter:
     def __init__(self):
@@ -24,16 +26,13 @@ class Linter:
             }
         })
 
-    def load(self, path):
-        with open(path, "r") as f:
-            return yaml.load(f, Loader=yaml.SafeLoader)
-
     def validate(self, data):
         try:
             self.schema.validate(data)    
             return True
         except SchemaError as se:
-            raise se
+            logger.error(se)
 
 if __name__ == "__main__":
-    raise Error("This module is to be imported")
+    print("[!] -> This module is to be imported")
+    sys.exit(1)

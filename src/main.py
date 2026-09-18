@@ -22,6 +22,7 @@ class RuleResult:
     #tests: str
 
 CA_CERT = Path("./artifacts/ares.crt")
+ARTIFACTS_JSON = Path("./artifacts/meta.json")
 RULES_PATH = Path("./rules/")
 MD_PATH = Path("./artifacts/")
 SUPPORTED_RULES = [
@@ -49,16 +50,16 @@ def lint(linter, file):
         return False
 
 def main():
+    results = list()
     linter = Linter()
     markdown = Markdown()
     validator = Validator()
-    results = list()
-
     es_client = Elasticsearch(
         os.environ["ELASTIC_URL"],
         api_key=os.environ["ELASTIC_API_KEY"],
         ca_certs=CA_CERT
     )
+
     files = RULES_PATH.rglob("metadata.yml")
     for file in files:
         rules_path = Path(file.parent)
@@ -69,12 +70,20 @@ def main():
         linter_result = linter.validate(meta) 
         if linter_result:
             logger.info(f"Validated metadata.yml [{file}]")
+
         for rule in rules_path.iterdir():
             rule_type = rule.suffix.lstrip(".")
-            rule_indices = meta["indices"]
+
             if rule_type in SUPPORTED_RULES:
-                print(type(rule.read_text()), rule.read_text())
-                validate_result = validator.validate(es_client, rule.read_text(), rule_type, rule_indices)
+                rule_indices = meta["indices"]
+                rule_content = rule.read_text()
+                assert(len(rule_content) > 1)
+                validate_result = validator.validate(
+                        es_client, 
+                        rule_content, 
+                        rule_type, 
+                        rule_indices
+                )
                 results.append(
                     RuleResult(
                         name=meta["name"],
@@ -87,6 +96,8 @@ def main():
 
     md = markdown.generate(results)
     markdown.write(md, Path("./artifacts/README.md"))
+    artifacts.emit(results, ARTIFACTS_JSON)
+
 
 if __name__ == "__main__":
     init_logging(logging.DEBUG)

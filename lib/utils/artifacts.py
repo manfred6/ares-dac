@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from typing import List, Dict, Any
+from dataclasses import asdict
 import os
 import sys
 import logging
@@ -20,8 +21,15 @@ def load(path, type = "yaml"):
 
     return None
 
-def emit(self, data, type = "json"):
-    return
+def emit(data, path, type = "json"):
+    if type == "json":
+        logger.info(f"Attempting to emit artifacts json to {path}")
+        with path.open("w", encoding="utf-8") as f:
+            json.dump(
+                [asdict(d) for d in data],
+                f,
+                indent=2,
+            )
 
 if __name__ == "__main__":
     print("[!] -> This module is meant to be imported")

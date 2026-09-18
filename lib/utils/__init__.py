@@ -1,5 +1,5 @@
 from . import artifacts
-from . import markdown
+from .markdown import Markdown
 
 __all__ = [
     "artifacts",

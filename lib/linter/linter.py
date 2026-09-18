@@ -11,6 +11,7 @@ logger = logging.getLogger(__name__)
 class Linter:
     def __init__(self):
         self.schema = Schema({
+            "id"  : str
             "name": str,
             "description": str,
             "date": {

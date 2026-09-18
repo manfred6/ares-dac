@@ -7,13 +7,7 @@ import os
 import logging
 
 from linter import Linter
-from utils import artifacts
-
-def init_logging(level=logging.INFO):
-    logging.basicConfig(
-        level=level,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    )
+from utils import artifacts, Markdown
 
 @dataclass
 class RuleResult:
@@ -26,6 +20,15 @@ class RuleResult:
 
 RULES_PATH = Path("./rules/")
 MD_PATH = Path("./artifacts/")
+SUPPORTED_RULES = [
+        "esql"
+]
+
+def init_logging(level=logging.INFO):
+    logging.basicConfig(
+        level=level,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    )
 
 def check_result(result):
     return "OK" if result else "ERR"
@@ -41,9 +44,11 @@ def lint(linter, file):
 
 def main():
     linter = Linter()
+    markdown = Markdown()
     results = list()
     files = RULES_PATH.rglob("metadata.yml")
     for file in files:
+        rules_path = Path(file.parent)
         if (len(os.listdir(Path(file.parent))) < 2):
             logger.warn(f"Rule path [{Path(file.parent)}] has no rules in it")
             continue
@@ -51,17 +56,20 @@ def main():
         linter_result = linter.validate(meta) 
         if linter_result:
             logger.info(f"Validated metadata.yml [{file}]")
+        for rule in rules_path.iterdir():
+            rule_type = rule.suffix.lstrip(".")
+            if rule_type in SUPPORTED_RULES:
+                results.append(
+                    RuleResult(
+                        name=meta["name"],
+                        path=str(file.parent),
+                        rule_type=rule_type,
+                        lint=check_result(linter_result)
+                    )
+                )
 
-        results.append(
-            RuleResult(
-                name=meta["name"],
-                path=str(file.parent),
-                rule_type="none",
-                lint=check_result(linter_result)
-            )
-        )
-
-    print(results)
+    md = markdown.generate(results)
+    markdown.write(md, Path("./artifacts/README.md"))
 
 if __name__ == "__main__":
     init_logging(logging.DEBUG)

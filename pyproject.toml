@@ -11,6 +11,8 @@ requires-python = ">=3.11"
 dependencies = [
     "PyYAML>=6.0",
     "schema>=0.7",
+    "elasticsearch>=9.0",
+    "dotenv"
 ]
 
 [tool.setuptools.packages.find]

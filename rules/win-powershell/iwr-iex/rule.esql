@@ -1,0 +1,2 @@
+FROM logs-windows.powershell_operational-default |
+  WHERE powershell.file.script_block_text LIKE "*iex(*iwr*" OR powershell.file.script_block_text LIKE "*iwr*|*iex"

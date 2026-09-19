@@ -1,0 +1,32 @@
+---
+uuid: "22299c58-5905-41e0-ae0c-278aa9436fd0"
+name: "Powershell IWR directly into IEX "
+description: |
+  Detects when content is downloaded over Invoke-WebRequest and directly executed in memory using PowerShell
+  This is often done to avoid touching the filesystem and avoid detection there.
+date:
+    created: "2026-09-16"
+    modified: "2026-09-16"
+types:
+    - esql
+    - sigma
+indices:
+    - logs-windows.powershell_operational
+author: manfred6
+references:
+    - https://hexastrike.com/resources/blog/dfir/lumma-stealer-distribution-via-fake-captchas/
+mitre:
+  attack:
+     - T1059 
+     - T1059.001
+
+kibana:
+  enabled: true
+  interval: 5m
+  from: now-6m
+  to: now
+  severity: medium
+  risk_score: 47
+  timestamp_override: event.ingested
+  max_signals: 100
+

@@ -1,0 +1,10 @@
+[
+  {
+    "uuid": "22299c58-5905-41e0-ae0c-278aa9436fd0",
+    "name": "Powershell IWR directly into IEX ",
+    "path": "rules/win-powershell/iwr-iex",
+    "rule_type": "esql",
+    "lint": "OK",
+    "validation": "OK"
+  }
+]

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 from pathlib import Path
-from schema import Schema, SchemaError, Regex # https://www.andrewvillazon.com/validate-yaml-python-schema/
+from schema import Schema, SchemaError, Regex, Optional, Or, And # https://www.andrewvillazon.com/validate-yaml-python-schema/
 import os, sys
 import logging
 
@@ -24,6 +24,17 @@ class Linter:
             "references": [str],
             "mitre": {
                 "attack": [Regex(r"^T[0-9]+(\.[0-9]+)?$")]
+            },
+            Optional("kibana"): {
+                Optional("enabled"): bool,
+                Optional("interval"): str,
+                Optional("from"): str,
+                Optional("to"): str,
+                Optional("severity"): Or("low", "medium", "high", "critical"),
+                Optional("risk_score"): And(int, lambda n: 0 <= n <= 100),
+                Optional("timestamp_override"): str,
+                Optional("max_signals"): int,
+                Optional("tags"): [str]
             }
         })
 

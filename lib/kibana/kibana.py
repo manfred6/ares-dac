@@ -19,7 +19,7 @@ class Kibana:
         "critical": 90,
     }
 
-    def __init__(self, endpoint: str, api_key: str, ca_certs: Path, attack_path: Path | None = None timeout: int | None):
+    def __init__(self, endpoint: str, api_key: str, ca_certs: Path, attack_path: Path | None = None, timeout: int | None = None):
         self.endpoint = endpoint.rstrip("/")
         self.timeout = 10
         self.attack_path = Path("artifacts/enterprise-attack.json")
@@ -152,7 +152,7 @@ class Kibana:
 
     def format_rule(self, metadata: dict, query: str, rule_type: str) -> dict:
         # build detection payload for kibana from metadata.yml. meta.uuid -> kibana.rule_id
-        logger.info(f"Building kibana detection object of type {rule_type} for [name: {metatada.get('name')}, uuid: {metadata.get('uuid')}]")
+        logger.info(f"Building kibana detection object of type {rule_type} for [name: {metadata.get('name')}, uuid: {metadata.get('uuid')}]")
 
         rule_type = rule_type.lower()
         payload = metadata.get("kibana", {}).copy()

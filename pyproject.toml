@@ -12,7 +12,9 @@ dependencies = [
     "PyYAML>=6.0",
     "schema>=0.7",
     "elasticsearch>=9.0",
-    "dotenv"
+    "requests>=2.32",
+    "mitreattack-python>=6.2",
+    "python-dotenv>=1.0",
 ]
 
 [tool.setuptools.packages.find]
